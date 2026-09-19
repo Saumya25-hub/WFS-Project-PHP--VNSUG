@@ -1,0 +1,3 @@
+# Prevent direct web access to configuration files
+Order deny,allow
+Deny from all
