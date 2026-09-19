@@ -1,4 +1,4 @@
-# Online Watches Website - Week 1 Progress (PHP)
+# Online Watches Website - (PHP)
 
 ## Project Overview
 - **Subject:** BCA Semester 5 - 504 Web Framework & Services (WFS)
