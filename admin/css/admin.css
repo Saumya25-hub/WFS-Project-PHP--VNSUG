@@ -384,6 +384,52 @@ textarea.form-control {
     border: 1px solid #b6effb;
 }
 
+/* Status Badges */
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.badge-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.badge-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffecb5;
+}
+
+.badge-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.badge-info {
+    background-color: #cff4fc;
+    color: #055160;
+    border: 1px solid #b6effb;
+}
+
+.badge-primary {
+    background-color: #e0cffc;
+    color: #3d0a91;
+    border: 1px solid #cbb2fe;
+}
+
+.badge-secondary {
+    background-color: #e2e8f0;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+}
+
 /* Login Card */
 .admin-login-wrapper {
     min-height: 100vh;

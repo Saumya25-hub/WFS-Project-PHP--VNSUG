@@ -39,6 +39,7 @@ if ($res) {
     <div style="display: flex; gap: 10px;">
         <a href="product_add.php" class="btn btn-primary">+ Add New Product</a>
         <a href="brand_add.php" class="btn btn-success">+ Add New Brand</a>
+        <a href="stock.php" class="btn btn-secondary">Manage Stock</a>
     </div>
 </div>
 
@@ -65,7 +66,7 @@ if ($res) {
     <div class="stat-card card-amber">
         <h3>Customer Orders</h3>
         <div class="stat-value"><?php echo $order_count; ?></div>
-        <span class="stat-sub">Total Orders</span>
+        <a href="orders.php" class="stat-link">View Orders &rarr;</a>
     </div>
 </div>
 

@@ -26,7 +26,13 @@ $active_admin_page = basename($_SERVER['PHP_SELF'] ?? '');
             <a href="products.php" class="<?php echo (strpos($active_admin_page, 'product') !== false) ? 'active' : ''; ?>">Products</a>
         </li>
         <li>
+            <a href="stock.php" class="<?php echo (strpos($active_admin_page, 'stock') !== false) ? 'active' : ''; ?>">Stock</a>
+        </li>
+        <li>
             <a href="brands.php" class="<?php echo (strpos($active_admin_page, 'brand') !== false) ? 'active' : ''; ?>">Brands</a>
+        </li>
+        <li>
+            <a href="orders.php" class="<?php echo (strpos($active_admin_page, 'order') !== false) ? 'active' : ''; ?>">Orders</a>
         </li>
         <li>
             <a href="reviews.php" class="<?php echo (strpos($active_admin_page, 'review') !== false) ? 'active' : ''; ?>">Reviews</a>
