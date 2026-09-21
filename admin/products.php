@@ -28,15 +28,15 @@ if ($result) {
 </div>
 
 <?php if ($msg === 'added'): ?>
-    <div class="alert alert-success">✅ Product added successfully! It is now visible on the client store.</div>
+    <div class="alert alert-success">Product added successfully. It is now visible on the client store.</div>
 <?php elseif ($msg === 'updated'): ?>
-    <div class="alert alert-success">✅ Product details updated successfully!</div>
+    <div class="alert alert-success">Product details updated successfully.</div>
 <?php elseif ($msg === 'deleted'): ?>
-    <div class="alert alert-success">✅ Product has been deleted from catalog.</div>
+    <div class="alert alert-success">Product has been deleted from catalog.</div>
 <?php endif; ?>
 
 <?php if (!empty($err)): ?>
-    <div class="alert alert-danger">⚠️ <?php echo htmlspecialchars($err); ?></div>
+    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
 <?php endif; ?>
 
 <div class="table-responsive">

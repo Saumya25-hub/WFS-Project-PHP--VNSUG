@@ -54,8 +54,7 @@ $flash_msg = $_GET['msg'] ?? '';
 // Fetch products & calculate stock metrics
 $products = [];
 $total_products = 0;
-$in_stock_cnt = 0;
-$low_stock_cnt = 0;
+$available_cnt = 0;
 $out_stock_cnt = 0;
 
 $res = mysqli_query($conn, "SELECT * FROM products ORDER BY name ASC");
@@ -66,10 +65,8 @@ if ($res) {
         $qty = (int)$row['quantity'];
         if ($qty <= 0) {
             $out_stock_cnt++;
-        } elseif ($qty <= 5) {
-            $low_stock_cnt++;
         } else {
-            $in_stock_cnt++;
+            $available_cnt++;
         }
     }
 }
@@ -78,7 +75,7 @@ if ($res) {
 <div class="admin-page-header">
     <div>
         <h1>Stock Management</h1>
-        <p class="admin-page-subtitle">Monitor product inventory levels and quickly update watch stock quantities.</p>
+        <p class="admin-page-subtitle">Manage watch stock quantity and availability.</p>
     </div>
     <a href="products.php" class="btn btn-secondary">View Product Catalog</a>
 </div>
@@ -86,44 +83,38 @@ if ($res) {
 <!-- Stock Overview Counter Cards -->
 <div class="stats-grid">
     <div class="stat-card">
-        <h3>Total Watch Models</h3>
+        <h3>Total Products</h3>
         <div class="stat-value"><?php echo $total_products; ?></div>
-        <span class="stat-sub">Products in catalog</span>
+        <span class="stat-sub">Watches in store</span>
     </div>
 
     <div class="stat-card card-green">
-        <h3>Healthy Stock (&gt; 5 units)</h3>
-        <div class="stat-value"><?php echo $in_stock_cnt; ?></div>
-        <span class="stat-sub">Sufficient inventory</span>
-    </div>
-
-    <div class="stat-card card-amber">
-        <h3>Low Stock (1 - 5 units)</h3>
-        <div class="stat-value"><?php echo $low_stock_cnt; ?></div>
-        <span class="stat-sub">Needs restocking soon</span>
+        <h3>Available Stock</h3>
+        <div class="stat-value"><?php echo $available_cnt; ?></div>
+        <span class="stat-sub">Products in stock</span>
     </div>
 
     <div class="stat-card card-purple" style="border-left-color: #dc3545;">
-        <h3>Out of Stock (0 units)</h3>
+        <h3>Out of Stock</h3>
         <div class="stat-value" style="color: #dc3545;"><?php echo $out_stock_cnt; ?></div>
-        <span class="stat-sub">Cannot be ordered</span>
+        <span class="stat-sub">0 quantity</span>
     </div>
 </div>
 
 <?php if ($flash_msg === 'updated'): ?>
-    <div class="alert alert-success">✅ Stock quantity updated successfully!</div>
+    <div class="alert alert-success">Stock quantity updated successfully.</div>
 <?php elseif ($flash_msg === 'added'): ?>
-    <div class="alert alert-success">✅ Additional stock units added successfully!</div>
+    <div class="alert alert-success">Stock units added successfully.</div>
 <?php endif; ?>
 
 <?php if (!empty($err)): ?>
-    <div class="alert alert-danger">⚠️ <?php echo htmlspecialchars($err); ?></div>
+    <div class="alert alert-danger"><?php echo htmlspecialchars($err); ?></div>
 <?php endif; ?>
 
 <!-- Quick Add Stock Form Box -->
 <div class="form-card" style="margin-bottom: 25px; max-width: 100%;">
     <h3 style="font-size: 15px; margin-bottom: 12px; color: #212529;">
-        📦 Quick Add Stock to Product
+        Add Stock to Product
     </h3>
     <form method="POST" action="stock.php" style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
         <input type="hidden" name="action" value="add_stock">
@@ -141,12 +132,12 @@ if ($res) {
         </div>
 
         <div style="flex: 1; min-width: 140px;">
-            <label style="font-size: 13px; font-weight: 600; color: #495057; display: block; margin-bottom: 5px;">Units to Add (+):</label>
+            <label style="font-size: 13px; font-weight: 600; color: #495057; display: block; margin-bottom: 5px;">Units to Add:</label>
             <input type="number" name="add_qty" value="10" min="1" max="1000" class="form-control" required>
         </div>
 
         <div>
-            <button type="submit" class="btn btn-success" style="height: 38px;">+ Add Units to Stock</button>
+            <button type="submit" class="btn btn-success" style="height: 38px;">Add Stock</button>
         </div>
     </form>
 </div>
@@ -191,11 +182,9 @@ if ($res) {
                         <!-- Stock Status Badge -->
                         <td style="text-align: center;">
                             <?php if ($qty <= 0): ?>
-                                <span class="badge badge-danger">Out of Stock (0)</span>
-                            <?php elseif ($qty <= 5): ?>
-                                <span class="badge badge-warning">Low Stock (<?php echo $qty; ?>)</span>
+                                <span class="badge badge-danger">Out of Stock</span>
                             <?php else: ?>
-                                <span class="badge badge-success">In Stock (<?php echo $qty; ?>)</span>
+                                <span class="badge badge-success"><?php echo $qty; ?> in stock</span>
                             <?php endif; ?>
                         </td>
 

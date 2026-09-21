@@ -59,17 +59,16 @@ $msg = $_GET['msg'] ?? '';
 
 <div class="admin-page-header">
     <div>
-        <h1>Order Invoice: <?php echo htmlspecialchars($order['order_number']); ?></h1>
-        <p class="admin-page-subtitle">Placed on <?php echo date('d F Y \a\t h:i A', strtotime($order['created_at'])); ?></p>
+        <h1>Order Details: <?php echo htmlspecialchars($order['order_number']); ?></h1>
+        <p class="admin-page-subtitle">Placed on <?php echo date('d M Y, h:i A', strtotime($order['created_at'])); ?></p>
     </div>
-    <div style="display: flex; gap: 10px;">
+    <div>
         <a href="orders.php" class="btn btn-secondary">&larr; Back to Orders</a>
-        <button onclick="window.print();" class="btn btn-primary">🖨️ Print Invoice</button>
     </div>
 </div>
 
 <?php if ($msg === 'updated'): ?>
-    <div class="alert alert-success">✅ Order status updated successfully!</div>
+    <div class="alert alert-success">Order status updated successfully.</div>
 <?php endif; ?>
 
 <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 25px;">
@@ -111,9 +110,9 @@ $msg = $_GET['msg'] ?? '';
                 <td style="padding: 6px 0; color: #6c757d; width: 120px;">Payment Status:</td>
                 <td style="padding: 6px 0;">
                     <?php if ($order['payment_status'] === 'Paid'): ?>
-                        <span class="badge badge-success">✓ Paid</span>
+                        <span class="badge badge-success">Paid</span>
                     <?php else: ?>
-                        <span class="badge badge-warning">⏳ <?php echo htmlspecialchars($order['payment_status']); ?></span>
+                        <span class="badge badge-warning"><?php echo htmlspecialchars($order['payment_status']); ?></span>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -172,7 +171,7 @@ $msg = $_GET['msg'] ?? '';
                         <?php if (!empty($it['image'])): ?>
                             <img src="../<?php echo htmlspecialchars($it['image']); ?>" alt="watch" class="thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/50';">
                         <?php else: ?>
-                            <div style="width: 44px; height: 44px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; border-radius: 4px;">⌚</div>
+                            <img src="https://via.placeholder.com/50" alt="watch" class="thumb">
                         <?php endif; ?>
                     </td>
                     <td>

@@ -113,7 +113,7 @@ if ($res) {
 </div>
 
 <?php if ($msg === 'updated'): ?>
-    <div class="alert alert-success">✅ Order status has been updated successfully!</div>
+    <div class="alert alert-success">Order status updated successfully.</div>
 <?php endif; ?>
 
 <div class="table-responsive">
@@ -127,7 +127,7 @@ if ($res) {
                 <th style="width: 110px;">Total Amount</th>
                 <th style="width: 120px;">Payment</th>
                 <th style="width: 170px;">Order Status</th>
-                <th style="width: 80px; text-align: center;">Invoice</th>
+                <th style="width: 80px; text-align: center;">Details</th>
             </tr>
         </thead>
         <tbody>
@@ -138,7 +138,7 @@ if ($res) {
                         <td>
                             <strong style="color: #0d6efd; font-size: 13px;"><?php echo htmlspecialchars($o['order_number']); ?></strong>
                             <div style="font-size: 11px; color: #6c757d; margin-top: 4px;">
-                                📅 <?php echo date('d M Y, h:i A', strtotime($o['created_at'])); ?>
+                                <?php echo date('d M Y, h:i A', strtotime($o['created_at'])); ?>
                             </div>
                         </td>
 
@@ -146,10 +146,10 @@ if ($res) {
                         <td>
                             <strong style="color: #212529;"><?php echo htmlspecialchars($o['customer_name']); ?></strong>
                             <div style="font-size: 12px; color: #495057; margin-top: 2px;">
-                                📞 <?php echo htmlspecialchars($o['customer_phone']); ?>
+                                <?php echo htmlspecialchars($o['customer_phone']); ?>
                             </div>
                             <div style="font-size: 11px; color: #6c757d;">
-                                ✉️ <?php echo htmlspecialchars($o['customer_email']); ?>
+                                <?php echo htmlspecialchars($o['customer_email']); ?>
                             </div>
                         </td>
 
@@ -159,7 +159,7 @@ if ($res) {
                                 <?php echo htmlspecialchars($o['shipping_address']); ?>
                             </div>
                             <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
-                                📍 <?php echo htmlspecialchars($o['city']); ?> - <?php echo htmlspecialchars($o['pincode']); ?>
+                                <?php echo htmlspecialchars($o['city']); ?> - <?php echo htmlspecialchars($o['pincode']); ?>
                             </div>
                         </td>
 
@@ -169,7 +169,7 @@ if ($res) {
                                 <ul style="list-style: none; padding-left: 0; margin: 0; font-size: 12px;">
                                     <?php foreach ($o['items'] as $it): ?>
                                         <li style="padding: 2px 0; border-bottom: 1px dashed #e2e8f0;">
-                                            • <strong><?php echo htmlspecialchars($it['product_name']); ?></strong> 
+                                            <strong><?php echo htmlspecialchars($it['product_name']); ?></strong> 
                                             <span style="color: #64748b;">(Qty: <?php echo $it['quantity']; ?> × ₹<?php echo number_format($it['price'], 2); ?>)</span>
                                         </li>
                                     <?php endforeach; ?>
@@ -190,9 +190,9 @@ if ($res) {
                         <td>
                             <div style="margin-bottom: 4px;">
                                 <?php if ($o['payment_status'] === 'Paid'): ?>
-                                    <span class="badge badge-success">✓ Paid</span>
+                                    <span class="badge badge-success">Paid</span>
                                 <?php elseif ($o['payment_status'] === 'Pending'): ?>
-                                    <span class="badge badge-warning">⏳ Pending</span>
+                                    <span class="badge badge-warning"><?php echo htmlspecialchars($o['payment_status']); ?></span>
                                 <?php else: ?>
                                     <span class="badge badge-secondary"><?php echo htmlspecialchars($o['payment_status']); ?></span>
                                 <?php endif; ?>
@@ -224,7 +224,7 @@ if ($res) {
 
                         <!-- View Details / Invoice -->
                         <td style="text-align: center;">
-                            <a href="order_details.php?id=<?php echo $o['id']; ?>" class="btn btn-secondary btn-sm" title="View Order Invoice">View</a>
+                            <a href="order_details.php?id=<?php echo $o['id']; ?>" class="btn btn-secondary btn-sm" title="View Order Details">View</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

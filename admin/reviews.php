@@ -42,7 +42,7 @@ function adminStars($rating) {
 </div>
 
 <?php if ($msg === 'deleted'): ?>
-    <div class="alert alert-success">✅ Review has been deleted successfully.</div>
+    <div class="alert alert-success">Review has been deleted successfully.</div>
 <?php endif; ?>
 
 <?php if (!empty($err)): ?>
